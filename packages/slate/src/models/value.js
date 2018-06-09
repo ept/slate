@@ -3,6 +3,7 @@ import logger from 'slate-dev-logger'
 import { Record, Set, List, Map } from 'immutable'
 
 import MODEL_TYPES from '../constants/model-types'
+import applyOperation from '../operations/apply'
 import Change from './change'
 import Data from './data'
 import Document from './document'
@@ -626,6 +627,17 @@ class Value extends Record(DEFAULTS) {
 
   change(attrs = {}) {
     return new Change({ ...attrs, value: this })
+  }
+
+  /**
+   * Apply an `operation` to this value, returning an updated value.
+   *
+   * @param {Object|Operation} operation
+   * @return {Value} value
+   */
+
+  applyOperation(operation) {
+    return applyOperation(this, operation)
   }
 
   /**

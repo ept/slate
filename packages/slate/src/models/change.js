@@ -7,7 +7,6 @@ import { List } from 'immutable'
 import MODEL_TYPES from '../constants/model-types'
 import Changes from '../changes'
 import Operation from './operation'
-import apply from '../operations/apply'
 
 /**
  * Debug.
@@ -104,7 +103,7 @@ class Change {
 
     // Apply the operation to the value.
     debug('apply', { operation, save, merge })
-    value = apply(value, operation)
+    value = value.applyOperation(operation)
 
     // If needed, save the operation to the history.
     if (history && save) {
